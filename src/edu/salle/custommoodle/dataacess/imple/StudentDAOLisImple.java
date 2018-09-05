@@ -5,8 +5,12 @@
  */
 package edu.salle.custommoodle.dataacess.imple;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import edu.salle.custommoodle.dataacess.StudentDAO;
 import edu.salle.custommoodle.model.Student;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,14 +48,18 @@ public class StudentDAOLisImple implements StudentDAO
     }
 
     @Override
-    public Student findByLastName(String lastName) {
+    public List<Student> findByLastName(String lastName) {
+        List<Student> resStudentList = new ArrayList<>();
         lastName=lastName.toLowerCase().trim();
-        Student res=null;
+        //Student res=null;
         for(Student student: studentList){
             if (student.getLastName().toLowerCase().contains(lastName))
-                return student;
+            {
+                resStudentList.add(student);
+            }
+                //return student;
         }
-        return null;
+        return resStudentList;
     }
 
     @Override
@@ -63,6 +71,25 @@ public class StudentDAOLisImple implements StudentDAO
     public void update(Student student) {
         int posicion= studentList.indexOf(student);
         studentList.set(posicion, student);
+    }
+
+    @Override
+    public void load() {
+        try{
+            Gson gson = new Gson();
+            BufferedReader br =
+                    new BufferedReader(new FileReader("students.json"));
+            studentList = gson.fromJson(br, new TypeToken<List<Student>>(){
+        }.getType());
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void commitChanges() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

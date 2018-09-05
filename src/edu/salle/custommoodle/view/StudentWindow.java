@@ -8,6 +8,7 @@ package edu.salle.custommoodle.view;
 import edu.salle.custommoodle.businesslogic.StudentBLO;
 import edu.salle.custommoodle.model.Student;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -146,13 +147,22 @@ public class StudentWindow extends javax.swing.JFrame {
 
     private void bSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSearchActionPerformed
         // TODO add your handling code here:
-        String id = fID.getText();
-        Student student = studentBLO.find(id);
-        if(student!=null)
-        {
-            tfName.setText(student.getName());
-            tfLastName.setText(student.getLastName());
-        }
+//        String id = fID.getText();
+//        Student student = studentBLO.find(id);
+//        if(student!=null)
+//        {
+//            tfName.setText(student.getName());
+//            tfLastName.setText(student.getLastName());
+//        }
+          String lastName = tfLastName.getText().trim();
+          if(!lastName.isEmpty()){
+          List<Student> studentList=studentBLO.findByLastName(lastName);
+          if(!studentList.isEmpty()){
+              refreshTable(studentList);
+          }
+          }else {
+              JOptionPane.showMessageDialog (null,"You need to fill the last name");
+          }
     }//GEN-LAST:event_bSearchActionPerformed
 
     public void clearTable(){
@@ -162,8 +172,9 @@ public class StudentWindow extends javax.swing.JFrame {
         }
     }
     
-    public void refreshTable(){
-    List<Student> studentList= studentBLO.findAll();
+    public void refreshTable(List<Student> studentList){
+        clearTable();
+    //List<Student> studentList= studentBLO.findAll();
         DefaultTableModel dtm=(DefaultTableModel) tStudents.getModel();
         Object[] emptyRow={""};
         for(int i=0; i<studentList.size(); i++){
@@ -175,7 +186,7 @@ public class StudentWindow extends javax.swing.JFrame {
     }
     
     private void bRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefreshActionPerformed
-        refreshTable();
+        refreshTable(studentBLO.findAll());
     }//GEN-LAST:event_bRefreshActionPerformed
 
 
