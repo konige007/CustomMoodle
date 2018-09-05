@@ -49,6 +49,7 @@ public class StudentWindow extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tStudents = new javax.swing.JTable();
         bRefresh = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,6 +134,14 @@ public class StudentWindow extends javax.swing.JFrame {
         });
         getContentPane().add(bRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
 
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,6 +198,12 @@ public class StudentWindow extends javax.swing.JFrame {
         refreshTable(studentBLO.findAll());
     }//GEN-LAST:event_bRefreshActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        studentBLO.commitChanges();
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -197,6 +212,7 @@ public class StudentWindow extends javax.swing.JFrame {
     private javax.swing.JButton bSave;
     private javax.swing.JButton bSearch;
     private javax.swing.JButton bUpdate;
+    private javax.swing.JButton btnExit;
     private javax.swing.JTextField fID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
