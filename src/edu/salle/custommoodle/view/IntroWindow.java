@@ -29,6 +29,7 @@ public class IntroWindow extends javax.swing.JFrame {
 
         btnAlumnos = new javax.swing.JButton();
         btnMaterias = new javax.swing.JButton();
+        btnAsignar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,16 +47,28 @@ public class IntroWindow extends javax.swing.JFrame {
             }
         });
 
+        btnAsignar.setText("Asignar Materias");
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(btnAlumnos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(btnMaterias)
-                .addGap(70, 70, 70))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAsignar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAlumnos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addComponent(btnMaterias)
+                        .addGap(70, 70, 70))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,7 +77,9 @@ public class IntroWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlumnos)
                     .addComponent(btnMaterias))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnAsignar)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         pack();
@@ -81,6 +96,12 @@ public class IntroWindow extends javax.swing.JFrame {
         new MateriasWindow().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMateriasActionPerformed
+
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        // TODO add your handling code here:
+        new AsignacionMateria().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAsignarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,6 +140,7 @@ public class IntroWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlumnos;
+    private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnMaterias;
     // End of variables declaration//GEN-END:variables
 }
